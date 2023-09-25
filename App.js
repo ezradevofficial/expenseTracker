@@ -3,8 +3,8 @@ import React from 'react';
 
 const App = () => {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Hello world!</Text>
+    <View className="flex-1 items-center justify-center bg-slate-400">
+      <Text className="text-red-500">Hello world!</Text>
     </View>
   );
 };
