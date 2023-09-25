@@ -5,6 +5,7 @@ import {
   AddTripScreen,
   HomeScreen,
   LoginScreen,
+  TripExpensesScreen,
 } from '../screens';
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,7 @@ const AppNavigation = () => {
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="AddExpense" component={AddExpenseScreen} />
         <Stack.Screen name="AddTrip" component={AddTripScreen} />
+        <Stack.Screen name="TripExpenses" component={TripExpensesScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
