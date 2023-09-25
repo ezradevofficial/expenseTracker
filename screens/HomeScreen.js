@@ -9,12 +9,12 @@ import {useNavigation} from '@react-navigation/native';
 const items = [
   {
     id: 1,
-    place: 'Gujrat',
-    country: 'Pakistan',
+    place: 'Nairobi',
+    country: 'Kenya',
   },
   {
     id: 2,
-    place: 'London Eye',
+    place: 'Machester',
     country: 'England',
   },
   {
@@ -37,7 +37,9 @@ const HomeScreen = () => {
         <Text className={`${colors.heading} font-bold text-3xl shadow-sm`}>
           Expensify
         </Text>
-        <TouchableOpacity className="p-2 px-3 bg-white border border-gray-200 rounded-full">
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Welcome')}
+          className="p-2 px-3 bg-white border border-gray-200 rounded-full">
           <Text className={colors.heading}>Logout</Text>
         </TouchableOpacity>
       </View>
