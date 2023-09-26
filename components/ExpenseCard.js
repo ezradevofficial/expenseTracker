@@ -8,11 +8,11 @@ const ExpenseCard = ({item}) => {
       style={{backgroundColor: categoryBG[item.category]}}
       className="flex-row justify-between items-center py-3 px-5 mb-3 rounded-2xl">
       <View>
-        <Text className={`${colors.heading} font-bold`}>{item.title}</Text>
-        <Text className={`${colors.heading} text-xs`}>{item.category}</Text>
+        <Text className={`text-gray-600 font-bold`}>{item.title}</Text>
+        <Text className={`text-gray-600 text-xs`}>{item.category}</Text>
       </View>
       <View>
-        <Text>Ksh {item.amount}</Text>
+        <Text className="text-black">Ksh {item.amount}</Text>
       </View>
     </View>
   );

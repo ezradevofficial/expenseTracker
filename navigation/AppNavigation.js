@@ -4,7 +4,6 @@ import {
   AddExpenseScreen,
   AddTripScreen,
   HomeScreen,
-  LoginScreen,
   SignInScreen,
   SignUpScreen,
   TripExpensesScreen,
@@ -31,7 +30,6 @@ const AppNavigation = () => {
           component={SignUpScreen}
         />
         <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="AddExpense" component={AddExpenseScreen} />
         <Stack.Screen name="AddTrip" component={AddTripScreen} />
         <Stack.Screen name="TripExpenses" component={TripExpensesScreen} />

@@ -1,9 +1,17 @@
-import {View, Text, TouchableOpacity, Image, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  FlatList,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {colors} from '../theme';
 import randomImage from '../assests/images/randomImage';
-import {EmptyList} from '../components';
+import {EmptyList, TripsCard} from '../components';
 import {useNavigation} from '@react-navigation/native';
 
 const items = [
@@ -31,16 +39,18 @@ const items = [
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const screenHeight = Math.round(Dimensions.get('window').height);
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1 bg-slate-100">
+      {/* <ScrollView> */}
       <View className="flex-row justify-between items-center p-4">
-        <Text className={`${colors.heading} font-bold text-3xl shadow-sm`}>
+        <Text className={`text-black font-bold text-3xl shadow-sm`}>
           Expensify
         </Text>
         <TouchableOpacity
           onPress={() => navigation.navigate('Welcome')}
           className="p-2 px-3 bg-white border border-gray-200 rounded-full">
-          <Text className={colors.heading}>Logout</Text>
+          <Text className="text-gray-600">Logout</Text>
         </TouchableOpacity>
       </View>
       <View className="flex-row justify-center bg-blue-200 rounded-xl mx-4 mb-4">
@@ -49,48 +59,33 @@ const HomeScreen = () => {
           className="h-60 w-60"
         />
       </View>
-      <View className="px-4 space-y-4">
+      <View className="px-4 space-y-4 ">
         <View className="flex-row justify-between items-center">
-          <Text className={`${colors.heading} font-bold text-xl shadow-sm`}>
+          <Text className={`text-black font-bold text-xl shadow-sm`}>
             Recent Trips
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate('AddTrip')}
             className="p-2 px-3 bg-white border border-gray-200 rounded-full">
-            <Text className={colors.heading}>Add Trip</Text>
+            <Text className="text-gray-600">Add Trip</Text>
           </TouchableOpacity>
         </View>
-        <View style={{height: 430}}>
-          <FlatList
-            data={items}
-            keyExtractor={item => item.id}
-            numColumns={2}
-            ListEmptyComponent={
-              <EmptyList message={"you haven't recorded any trips yet"} />
-            }
-            columnWrapperStyle={{
-              justifyContent: 'space-between',
-            }}
-            className="mx-1"
-            showsVerticalScrollIndicator={false}
-            renderItem={({item}) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('TripExpenses', {...item})}
-                className="bg-white p-3 rounded-2xl mb-3 shadow-sm">
-                <View>
-                  <Image source={randomImage()} className="h-36 w-36 mb-2" />
-                  <Text className={`${colors.heading} font-bold`}>
-                    {item.place}
-                  </Text>
-                  <Text className={`${colors.heading} text-xs`}>
-                    {item.country}
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
+        <FlatList
+          data={items}
+          keyExtractor={item => item.id}
+          ListEmptyComponent={
+            <EmptyList message={"you haven't recorded any trips yet"} />
+          }
+          style={{height: screenHeight / 2 - 20}}
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          columnWrapperStyle={{
+            justifyContent: 'space-between',
+          }}
+          renderItem={({item}) => <TripsCard item={item} />}
+        />
       </View>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };

@@ -6,7 +6,7 @@ import {useNavigation} from '@react-navigation/native';
 const WelcomeScreen = () => {
   const navigation = useNavigation();
   return (
-    <View className="flex-1 justify-around">
+    <View className="flex-1 justify-around bg-slate-100">
       <View className="flex items-center">
         <Image
           className="h-96 w-96 shadow"
@@ -14,8 +14,7 @@ const WelcomeScreen = () => {
         />
       </View>
       <View className=" mx-5 mb-20">
-        <Text
-          className={`font-bold text-4xl text-center mb-10 ${colors.heading}`}>
+        <Text className={`font-bold text-4xl text-center mb-10 text-black`}>
           Expensify
         </Text>
         <TouchableOpacity
