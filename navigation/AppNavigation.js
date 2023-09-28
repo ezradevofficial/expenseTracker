@@ -9,12 +9,23 @@ import {
   TripExpensesScreen,
   WelcomeScreen,
 } from '../screens';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {onAuthStateChanged} from 'firebase/auth';
+import {setUser} from '../redux/slices/user';
+import {auth} from '../config/firebase';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
   const {user} = useSelector(state => state.user);
+
+  const dispatch = useDispatch();
+
+  onAuthStateChanged(auth, u => {
+    // console.log('got user: ',u);
+    dispatch(setUser(u));
+  });
+
   if (user) {
     return (
       <NavigationContainer>

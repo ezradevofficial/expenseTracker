@@ -7,7 +7,6 @@ const TripsCard = ({item}) => {
   const navigation = useNavigation();
   const screenWidth = Math.round(Dimensions.get('window').width);
   const cardWidth = screenWidth / 2 - 24;
-  console.log(screenWidth, cardWidth);
   return (
     // <TouchableOpacity
     //   onPress={() => navigation.navigate('TripExpenses', {...item})}

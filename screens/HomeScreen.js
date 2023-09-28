@@ -13,6 +13,8 @@ import {colors} from '../theme';
 import randomImage from '../assests/images/randomImage';
 import {EmptyList, TripsCard} from '../components';
 import {useNavigation} from '@react-navigation/native';
+import {signOut} from 'firebase/auth';
+import {auth} from '../config/firebase';
 
 const items = [
   {
@@ -40,6 +42,10 @@ const items = [
 const HomeScreen = () => {
   const navigation = useNavigation();
   const screenHeight = Math.round(Dimensions.get('window').height);
+
+  const handleLogout = async () => {
+    await signOut(auth);
+  };
   return (
     <SafeAreaView className="flex-1 bg-slate-100">
       {/* <ScrollView> */}
@@ -48,7 +54,7 @@ const HomeScreen = () => {
           Expensify
         </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate('Welcome')}
+          onPress={handleLogout}
           className="p-2 px-3 bg-white border border-gray-200 rounded-full">
           <Text className="text-gray-600">Logout</Text>
         </TouchableOpacity>
