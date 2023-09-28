@@ -9,21 +9,39 @@ import {
 import React, {useState} from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {colors} from '../theme';
-import {BackButton} from '../components';
+import {BackButton, Loading} from '../components';
 import {useNavigation} from '@react-navigation/native';
+import Snackbar from 'react-native-snackbar';
+import {addDoc} from 'firebase/firestore';
+import {tripsRef} from '../config/firebase';
+import {useSelector} from 'react-redux';
 
 const AddTripScreen = () => {
   const [place, setPlace] = useState('');
   const [country, setCountry] = useState('');
+  const [loading, setLoading] = useState(false);
+  const {user} = useSelector(state => state.user);
 
   const navigation = useNavigation();
 
-  const handleAddTrip = () => {
+  const handleAddTrip = async () => {
     if (place && country) {
-      //good to go
-      navigation.navigate('Home');
+      setLoading(true);
+      let doc = await addDoc(tripsRef, {
+        place,
+        country,
+        userId: user.uid,
+      });
+      setLoading(false);
+      if (doc && doc.id) {
+        navigation.navigate('Home');
+      }
     } else {
-      //error message
+      setLoading(false);
+      Snackbar.show({
+        text: 'Destination and Country are Required!',
+        backgroundColor: 'red',
+      });
     }
   };
   return (
@@ -66,14 +84,18 @@ const AddTripScreen = () => {
           </View>
 
           <View>
-            <TouchableOpacity
-              onPress={handleAddTrip}
-              style={{backgroundColor: colors.button}}
-              className="my-6 rounded-full p-3 shadow-sm mx-2">
-              <Text className="text-center text-white text-lg font-bold">
-                Add Trip
-              </Text>
-            </TouchableOpacity>
+            {loading ? (
+              <Loading />
+            ) : (
+              <TouchableOpacity
+                onPress={handleAddTrip}
+                style={{backgroundColor: colors.button}}
+                className="my-6 rounded-full p-3 shadow-sm mx-2">
+                <Text className="text-center text-white text-lg font-bold">
+                  Add Trip
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </ScrollView>
